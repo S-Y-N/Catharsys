@@ -1,0 +1,43 @@
+{
+  "project_info": {
+    "project_number": "151503774647",
+    "project_id": "catarsys-4b108",
+    "storage_bucket": "catarsys-4b108.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:151503774647:android:f6c846531350556d937e32",
+        "android_client_info": {
+          "package_name": "com.example.catarsys"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "151503774647-jgesqupb7bk4td8rm424mfk9gpmkc6ol.apps.googleusercontent.com",
+          "client_type": 3,
+          "android_info": {
+            "package_name": "com.example.catarsys",
+            "certificate_hash": "594b9b39ea0dfd95e14b56bae682ff4d11f76aa5"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD0Kg-Yt9V1KDnadnsS0YYWBFuOb0L_LB8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "151503774647-jgesqupb7bk4td8rm424mfk9gpmkc6ol.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
