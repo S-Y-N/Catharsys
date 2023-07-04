@@ -3,14 +3,18 @@ package com.example.catarsys;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.TableLayout;
 import android.widget.Toast;
 
+import com.example.catarsys.Adapter.FragmentAdapter;
 import com.example.catarsys.databinding.ActivityMainBinding;
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,6 +28,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(_binding.getRoot());
 
         _auth = FirebaseAuth.getInstance();
+        _binding.viewPager.setAdapter(new FragmentAdapter(getSupportFragmentManager()));
+
+        _binding.tabLayout.setupWithViewPager(_binding.viewPager);
     }
 
     @Override
