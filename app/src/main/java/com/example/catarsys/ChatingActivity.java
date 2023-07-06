@@ -26,7 +26,7 @@ public class ChatingActivity extends AppCompatActivity {
         _db = FirebaseDatabase.getInstance();
 
         final String senderId = _auth.getUid();
-        String reciever = getIntent().getStringExtra("userId");
+        String receiver = getIntent().getStringExtra("userId");
         String userName = getIntent().getStringExtra("userName");
         String profilePic = getIntent().getStringExtra("profilePic");
 

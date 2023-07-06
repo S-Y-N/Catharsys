@@ -23,5 +23,6 @@
     <color name="settingIconColor">#0e8374</color>
     <color name="grayBg">#bcbcbc</color>
     <color name="chatbg">#aaaaaa</color>
+    <color name="lightBlue">#6FB1E6</color>
 
 </resources>
