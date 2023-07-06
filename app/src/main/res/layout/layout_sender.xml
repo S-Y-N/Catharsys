@@ -37,6 +37,8 @@
             android:maxWidth="270dp"
             android:minWidth="50dp"
             android:text="Catarsys"
+            android:textSize="18sp"
+            android:textColor="@color/black"
 
             app:layout_constraintBottom_toTopOf="@+id/senderTime"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
