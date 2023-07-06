@@ -3,6 +3,7 @@ package com.example.catarsys;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -32,6 +33,11 @@ public class SignUpActivity extends AppCompatActivity {
         _dialog = new ProgressDialog(SignUpActivity.this);
         _dialog.setTitle("Creating Account");
         _dialog.setMessage("Creating your account");
+
+        _binding.alreadyAcc.setOnClickListener(view -> {
+            Intent intent = new Intent(SignUpActivity.this, SignInActivity.class);
+            startActivity(intent);
+        });
 
         _binding.btnSignUp.setOnClickListener(view -> {
             if(!_binding.txtUsername.getText().toString().isEmpty()
