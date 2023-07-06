@@ -97,32 +97,26 @@ public class SignInActivity extends AppCompatActivity {
         //[END : SIGN IN BY THE EMAIL AND PASSWORD]
 
         ActivityResultLauncher<IntentSenderRequest> activityResultLauncher =
-                registerForActivityResult(new ActivityResultContracts.StartIntentSenderForResult(), new ActivityResultCallback<ActivityResult>() {
-                    @Override
-                    public void onActivityResult(ActivityResult result) {
-                        if(result.getResultCode() == Activity.RESULT_OK){
-                            try {
-                                SignInCredential credential = oneTapClient.getSignInCredentialFromIntent(result.getData());
-                                String idToken = credential.getGoogleIdToken();
-                                if (idToken !=  null) {
-                                    String email = credential.getId();
-                                    Toast.makeText(getApplicationContext(),"Email"+email,Toast.LENGTH_SHORT).show();
-                                    Log.d("TAG", "Got ID token.");
-                                }
-                            } catch (ApiException e) {
-                                e.printStackTrace();
+                registerForActivityResult(new ActivityResultContracts.StartIntentSenderForResult(), result -> {
+                    if(result.getResultCode() == Activity.RESULT_OK){
+                        try {
+                            SignInCredential credential = oneTapClient.getSignInCredentialFromIntent(result.getData());
+                            String idToken = credential.getGoogleIdToken();
+                            if (idToken !=  null) {
+                                String email = credential.getId();
+                                Toast.makeText(getApplicationContext(),"Email"+email,Toast.LENGTH_SHORT).show();
+                                Log.d("TAG", "Got ID token.");
                             }
+                        } catch (ApiException e) {
+                            e.printStackTrace();
                         }
                     }
                 });
         _binding.btnGoogle.setOnClickListener(view -> oneTapClient.beginSignIn(signInRequest)
-                .addOnSuccessListener(SignInActivity.this, new OnSuccessListener<BeginSignInResult>() {
-                    @Override
-                    public void onSuccess(BeginSignInResult result) {
-                        IntentSenderRequest intentSenderRequest =
-                                new IntentSenderRequest.Builder(result.getPendingIntent().getIntentSender()).build();
-                        activityResultLauncher.launch(intentSenderRequest);
-                    }
+                .addOnSuccessListener(SignInActivity.this, result -> {
+                    IntentSenderRequest intentSenderRequest =
+                            new IntentSenderRequest.Builder(result.getPendingIntent().getIntentSender()).build();
+                    activityResultLauncher.launch(intentSenderRequest);
                 })
                 .addOnFailureListener(SignInActivity.this, new OnFailureListener() {
                     @Override

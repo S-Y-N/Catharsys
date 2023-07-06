@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.LinearLayout;
 
 import com.example.catarsys.Adapter.ChatAdapter;
 import com.example.catarsys.Models.Message;
@@ -24,7 +23,6 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class ChatingActivity extends AppCompatActivity {
-
     ActivityChatingBinding _bind;
     FirebaseDatabase _db;
     FirebaseAuth _auth;
@@ -45,12 +43,9 @@ public class ChatingActivity extends AppCompatActivity {
         _bind.userName.setText(userName);
         Picasso.get().load(profilePic).placeholder(R.drawable.man).into(_bind.profileImage);
 
-        _bind.backArrow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ChatingActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
+        _bind.backArrow.setOnClickListener(view -> {
+            Intent intent = new Intent(ChatingActivity.this, MainActivity.class);
+            startActivity(intent);
         });
 
         final ArrayList<Message> messages = new ArrayList<>();
@@ -113,6 +108,5 @@ public class ChatingActivity extends AppCompatActivity {
                     });
         });
         /////[END: SEND MESSAGE FUNCTION]
-
     }
 }

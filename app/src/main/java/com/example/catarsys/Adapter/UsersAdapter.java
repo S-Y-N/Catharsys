@@ -23,13 +23,12 @@ import java.util.ArrayList;
 public class UsersAdapter  extends RecyclerView.Adapter<UsersAdapter.ViewHolder>{
 
     ArrayList<Users> list;
+    Context context;
 
     public UsersAdapter(ArrayList<Users> list, Context context) {
         this.list = list;
         this.context = context;
     }
-
-    Context context;
 
     @NonNull
     @Override

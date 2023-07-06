@@ -33,9 +33,7 @@ public class SignUpActivity extends AppCompatActivity {
         _dialog.setTitle("Creating Account");
         _dialog.setMessage("Creating your account");
 
-        _binding.btnSignUp.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
+        _binding.btnSignUp.setOnClickListener(view -> {
             if(!_binding.txtUsername.getText().toString().isEmpty()
                 &&!_binding.txtEmail.getText().toString().isEmpty()
                 &&!_binding.txtPassword.getText().toString().isEmpty())
@@ -67,8 +65,7 @@ public class SignUpActivity extends AppCompatActivity {
             }else{
                 Toast.makeText(SignUpActivity.this,"Enter Credentials", Toast.LENGTH_SHORT).show();
             }
-        }
-    });
+        });
     }
     private void clearEditView(){
         _binding.txtEmail.getText().clear();

@@ -12,7 +12,6 @@ import com.example.catarsys.Fragments.StatusFragment;
 
 public class FragmentAdapter extends FragmentPagerAdapter
 {
-
     public FragmentAdapter(@NonNull FragmentManager fm) {
         super(fm);
     }

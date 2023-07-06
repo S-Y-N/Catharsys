@@ -28,7 +28,6 @@ public class ChatAdapter extends RecyclerView.Adapter{
     int SENDER_VIEW_TYPE = 1;
     int RECEIVER_VIEW_TYPE = 2;
 
-
     public ChatAdapter(ArrayList<Message> _msgModel, Context _context) {
         this._msgModel = _msgModel;
         this._context = _context;
@@ -64,32 +63,23 @@ public class ChatAdapter extends RecyclerView.Adapter{
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         Message msg = _msgModel.get(position);
-
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
                 new AlertDialog.Builder(_context)
                         .setTitle("Delete")
                         .setMessage("Delete this message?")
-                        .setPositiveButton("yes", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                FirebaseDatabase db  = FirebaseDatabase.getInstance();
-                                String senderRoom = FirebaseAuth.getInstance().getUid() + receiverId;
-                                db.getReference().child("Chats").child(senderRoom)
-                                        .child(msg.getMessageId())
-                                        .setValue(null);
-                            }
-                        }).setNegativeButton("no", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                dialogInterface.dismiss();
-                            }
-                        }).show();
-
+                        .setPositiveButton("yes", (dialogInterface, i) -> {
+                            FirebaseDatabase db  = FirebaseDatabase.getInstance();
+                            String senderRoom = FirebaseAuth.getInstance().getUid() + receiverId;
+                            db.getReference().child("Chats").child(senderRoom)
+                                    .child(msg.getMessageId())
+                                    .setValue(null);
+                        }).setNegativeButton("no", (dialogInterface, i) -> dialogInterface.dismiss()).show();
                 return false;
             }
         });
+        //Добавление времени отправки сообщений в чате
 
         if(holder.getClass() == SenderViewHolder.class){
             ((SenderViewHolder) holder).senderMsg.setText(msg.getMessage());
@@ -123,7 +113,6 @@ public class ChatAdapter extends RecyclerView.Adapter{
         }
     }
     public class SenderViewHolder extends RecyclerView.ViewHolder{
-
         TextView senderMsg, senderTime;
         public SenderViewHolder(@NonNull View itemView) {
             super(itemView);
