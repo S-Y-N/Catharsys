@@ -1,6 +1,8 @@
 package com.example.catarsys.Adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +15,11 @@ import com.example.catarsys.ChatingActivity;
 import com.example.catarsys.Models.Message;
 import com.example.catarsys.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class ChatAdapter extends RecyclerView.Adapter{
     ArrayList<Message> _msgModel;
@@ -59,10 +64,46 @@ public class ChatAdapter extends RecyclerView.Adapter{
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         Message msg = _msgModel.get(position);
+
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                new AlertDialog.Builder(_context)
+                        .setTitle("Delete")
+                        .setMessage("Delete this message?")
+                        .setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                FirebaseDatabase db  = FirebaseDatabase.getInstance();
+                                String senderRoom = FirebaseAuth.getInstance().getUid() + receiverId;
+                                db.getReference().child("Chats").child(senderRoom)
+                                        .child(msg.getMessageId())
+                                        .setValue(null);
+                            }
+                        }).setNegativeButton("no", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.dismiss();
+                            }
+                        }).show();
+
+                return false;
+            }
+        });
+
         if(holder.getClass() == SenderViewHolder.class){
             ((SenderViewHolder) holder).senderMsg.setText(msg.getMessage());
+
+            Date date = new Date(msg.getTimestamp());
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(":h:mm a");
+            String currDate = simpleDateFormat.format(date);
+            ((SenderViewHolder)holder).senderTime.setText(currDate.toString());
         }else{
             ((ReceiverViewHolder)holder).receiveMsg.setText(msg.getMessage());
+            Date date = new Date(msg.getTimestamp());
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("h:mm a");
+            String currDate = simpleDateFormat.format(date);
+            ((ReceiverViewHolder)holder).receiveTime.setText(currDate.toString());
         }
     }
 
