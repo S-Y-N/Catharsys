@@ -44,7 +44,8 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if(id == R.id.settings){
-            Toast.makeText(this,"Setting",Toast.LENGTH_SHORT).show();
+            Intent sett = new Intent(MainActivity.this, SettingActivity.class);
+            startActivity(sett);
         }else if(id == R.id.groupChat){
             Toast.makeText(this,"Group Chat",Toast.LENGTH_SHORT).show();
         }else if(id == R.id.logout){
