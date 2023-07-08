@@ -88,24 +88,22 @@ public class ChatingActivity extends AppCompatActivity {
             _bind.enterMessage.setText("");
 
             _db.getReference().child("Chats")
-                    .child(senderRoom)
-                    .push()
-                    .setValue(model)
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void unused) {
-                            _db.getReference().child("Chats")
-                                    .child(receiverRoom)
-                                    .push()
-                                    .setValue(model)
-                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                        @Override
-                                        public void onSuccess(Void unused) {
-
-                                        }
-                                    });
-                        }
-                    });
+                .child(senderRoom)
+                .push()
+                .setValue(model)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        _db.getReference().child("Chats")
+                            .child(receiverRoom)
+                            .push()
+                            .setValue(model)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {}
+                        });
+                    }
+                });
         });
         /////[END: SEND MESSAGE FUNCTION]
     }
