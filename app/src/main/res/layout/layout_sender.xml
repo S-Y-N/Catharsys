@@ -38,7 +38,7 @@
             android:minWidth="50dp"
             android:text="Catarsys"
             android:textSize="18sp"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
 
             app:layout_constraintBottom_toTopOf="@+id/senderTime"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
@@ -55,6 +55,7 @@
             android:layout_marginBottom="4dp"
             android:text="14:17 pm"
             android:textSize="10sp"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
