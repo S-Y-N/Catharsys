@@ -98,6 +98,7 @@
             android:layout_gravity="right"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="5dp"
+            android:id="@+id/saveStatus"
             android:text="Save"
             android:textColor="@color/white"
             android:textSize="18sp"
