@@ -25,4 +25,12 @@
     <color name="chatbg">#aaaaaa</color>
     <color name="lightBlue">#6FB1E6</color>
 
+    <!--blues -->
+    <color name="blue1">#6CC1E3</color>
+    <color name="blue2">#20306B</color>
+    <color name="gray">#E6E9EF</color>
+    <color name="blue3">#1C609C</color>
+    <color name="peach">#F9CA89</color>
+    <color name="silver">#A8A9AD</color>
+
 </resources>
