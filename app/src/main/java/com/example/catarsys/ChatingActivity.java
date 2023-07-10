@@ -2,11 +2,18 @@ package com.example.catarsys;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.PopupMenu;
+import android.widget.Toast;
 
 import com.example.catarsys.Adapter.ChatAdapter;
 import com.example.catarsys.Models.Message;
@@ -40,9 +47,31 @@ public class ChatingActivity extends AppCompatActivity {
         String userName = getIntent().getStringExtra("userName");
         String profilePic = getIntent().getStringExtra("profilePic");
 
+        //set default image in profile
         _bind.userName.setText(userName);
         Picasso.get().load(profilePic).placeholder(R.drawable.man).into(_bind.profileImage);
 
+        //[START] ADD POPUP MENU IN CHATTING ROOM
+        _bind.menuIcon.setOnClickListener(view -> {
+            PopupMenu popup = new PopupMenu(ChatingActivity.this,_bind.menuIcon);
+            popup.getMenuInflater().inflate(R.menu.menu_s,popup.getMenu());
+            popup.setOnMenuItemClickListener(menuItem -> {
+                int id = menuItem.getItemId();
+                if(id == R.id.settings){
+                    Intent sett = new Intent(ChatingActivity.this, SettingActivity.class);
+                    startActivity(sett);
+                }else if(id == R.id.logout){
+                    _auth.signOut();
+                    Intent sett = new Intent(ChatingActivity.this, SignInActivity.class);
+                    startActivity(sett);
+                }
+                return true;
+            });
+            popup.show();
+        });
+        //[END] ADD POPUP MENU IN CHATTING ROOM
+
+        //return prev page
         _bind.backArrow.setOnClickListener(view -> {
             Intent intent = new Intent(ChatingActivity.this, MainActivity.class);
             startActivity(intent);
@@ -91,20 +120,13 @@ public class ChatingActivity extends AppCompatActivity {
                 .child(senderRoom)
                 .push()
                 .setValue(model)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        _db.getReference().child("Chats")
-                            .child(receiverRoom)
-                            .push()
-                            .setValue(model)
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void unused) {}
-                        });
-                    }
-                });
+                .addOnSuccessListener(unused -> _db.getReference().child("Chats")
+                    .child(receiverRoom)
+                    .push()
+                    .setValue(model)
+                    .addOnSuccessListener(unused1 -> {}));
         });
         /////[END: SEND MESSAGE FUNCTION]
     }
+
 }

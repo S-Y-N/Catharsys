@@ -19,7 +19,7 @@
     <color name="status_bg">#009688</color>
     <color name="chat_bg">#8bc34a</color>
     <color name="fb_color">#3c5793</color>
-    <color name="lightGreen">#633B48</color>
+    <color name="lightGreen">#AC3A5F</color>
     <color name="settingIconColor">#0e8374</color>
     <color name="grayBg">#bcbcbc</color>
     <color name="chatbg">#aaaaaa</color>
@@ -36,7 +36,7 @@
     <!--bg-->
     <color name="marron">#2A2831</color>
     <color name="marron_2">#4A4458</color>
-    <color name="marron_3">#332D41</color>
+    <color name="marron_3">#685C83</color>
 
 
 </resources>
